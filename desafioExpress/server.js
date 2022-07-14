@@ -1,20 +1,3 @@
-/* const express = require("express");
-const app = express();
-
-app.get('/', (req, res)=>{
-
-    res.send({mensaje: "Bienvenidos a la ruta raíz"});
-})
-
-const PORT = 8080;
-
-app.listen(PORT, ()=>{
-    console.log(`Servidor escuchando en puerto ${PORT}`);
-}) */
-
-//server.on("error", error=>console.log(`Error: ${error}`));
-
-
 const express = require("express");
 const fs = require("fs");
 const app = express();
@@ -82,30 +65,3 @@ const PORT = 8080;
 app.listen(PORT, ()=>{
     console.log(`Servidor escuchando en puerto ${PORT}`);
 })
-
-/**
- * 
- * Paso a paso
- * 
- * npm init -y   (-y para omitir la escritura de los parametros)
- * 
- * npm i -S express (instalar express)
- * 
- * crear archivo server.js
- * 
- * Agregar el require
- * puerto y metodos
- * 
- * inicializar con:
- * node server.js
- * 
- * Ir a localhost:PORT y se verá la raíz
- * 
- * 
- * 
- * para instalar nodemon
- * npm i -D nodemon
- * 
- * 
- * ojo con el gitignore, hay que agregarlo
- */
