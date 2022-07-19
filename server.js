@@ -21,15 +21,10 @@ class Contenedor{
     async getRandom(){
 
         try{
-            function getRandomInt(min, max) {
-                min = Math.ceil(min);
-                max = Math.floor(max);
-                return Math.floor(Math.random() * (max - min + 1)+min);
-              }
             let data = await fs.promises.readFile(`./${this.fileName}.txt`, 'utf-8');
             data = JSON.parse(data);
-            let idRandom = getRandomInt(1, 6);
-            let prodRandom = data.find(item => item.id === idRandom);
+            let randomPos = getRandomPos(1, data.length - 1);
+            let prodRandom = data[randomPos];
             return prodRandom;
 
         }catch(err){
@@ -39,7 +34,14 @@ class Contenedor{
 
 }
 
-const compra = new Contenedor('productos');
+function getRandomPos(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)+min);
+  }
+
+
+const producto = new Contenedor('productos');
 
 app.get('/', (req, res)=>{
 
@@ -48,13 +50,13 @@ app.get('/', (req, res)=>{
 
 app.get('/productoRandom', async (req, res)=>{
 
-    const prodRandom = await compra.getRandom();
+    const prodRandom = await producto.getRandom();
     res.send({productoRandom: prodRandom});
 })
 
 app.get('/productos', async (req, res)=>{
 
-    const prod = await compra.getAll();
+    const prod = await producto.getAll();
 
 
     res.send({productos: prod});
